@@ -34,7 +34,7 @@ const nextDrawImage = () => {
         convert();
         return;
     }
-    pax = ax, pay = ay, pbx = by, pby = by;
+    pax = ax, pay = ay, pbx = bx, pby = by;
     ax = ay = bx = by = undefined;
     imageIndex = imageIndex !== undefined ? imageIndex + 1 : 0;
     image = new Image();
