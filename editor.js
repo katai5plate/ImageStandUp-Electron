@@ -115,8 +115,7 @@ convBtn.addEventListener("click", e => {
 })
 document.addEventListener("keypress", e => {
     if (e.key === "Enter") {
-        if (isOver() === false) {
-            const file = path.parse(image.src);
+        const file = path.parse(image.src);
             const output = {
                 path: image.src,
                 ...file,
@@ -132,8 +131,5 @@ document.addEventListener("keypress", e => {
                 }
             )
             nextDrawImage();
-        }else{
-            convert();
-        }
     }
 })
