@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const iconv = require('iconv-lite');
 const label = document.getElementById("label");
 const convBtn = document.getElementById("convert");
 const canvas = document.getElementById("draw");
@@ -23,7 +24,7 @@ const resetCanvas = () => {
 let dirList;
 const getDirList = () => fs
     .readdirSync(`${__dirname}/images/`)
-    .filter(v => [".jpg", ".png", ".bmp"].includes(path.parse(v).ext));
+    .filter(v => [".jpg", ".png", ".bmp"].includes(path.parse(v).ext))
 
 const isOver = () => imageIndex >= dirList.length - 1;
 
@@ -72,6 +73,7 @@ const mousePos = mouseEvent => {
 
 const setup = () => {
     dirList = getDirList();
+    console.log(dirList)
     nextDrawImage();
 }
 const update = mouseEvent => {
@@ -125,8 +127,9 @@ document.addEventListener("keypress", e => {
                 by
             };
             fs.writeFileSync(
-                `./images/${file.name}.json`,
-                JSON.stringify(output), {
+                `./images/${decodeURIComponent(file.name)}.json`,
+                JSON.stringify(output),
+                {
                     encoding: "utf8"
                 }
             )
