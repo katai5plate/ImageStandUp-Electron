@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const iconv = require('iconv-lite');
+const converter = require('./convert');
 const label = document.getElementById("label");
 const convBtn = document.getElementById("convert");
 const canvas = document.getElementById("draw");
@@ -100,8 +100,13 @@ const update = mouseEvent => {
         context.stroke();
     }
 }
-const convert = () => {
-    console.log(1)
+const convert = async () => {
+    for(let f of dirList){
+        const r = converter.read(path.parse(f).name);
+        console.log(r);
+        await converter.conv2(r)
+        console.log(1);
+    }
 }
 
 setup();
@@ -121,10 +126,10 @@ document.addEventListener("keypress", e => {
             const output = {
                 path: image.src,
                 ...file,
-                ax,
-                ay,
-                bx,
-                by
+                ax: ax * zoom,
+                ay: ay * zoom,
+                bx: bx * zoom,
+                by: by * zoom
             };
             fs.writeFileSync(
                 `./images/${decodeURIComponent(file.name)}.json`,
