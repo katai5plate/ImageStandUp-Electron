@@ -14,7 +14,7 @@ const {
     showSaveDialog
 } = remote.dialog;
 
-let image, imageIndex, zoom, ax, ay, bx, by;
+let image, imageIndex, zoom, ax, ay, bx, by, pax, pay, pbx, pby;
 
 const resetCanvas = () => {
     [canvas.width, canvas.height] = [640, 480];
@@ -34,6 +34,7 @@ const nextDrawImage = () => {
         convert();
         return;
     }
+    pax = ax, pay = ay, pbx = by, pby = by;
     ax = ay = bx = by = undefined;
     imageIndex = imageIndex !== undefined ? imageIndex + 1 : 0;
     image = new Image();
@@ -123,6 +124,7 @@ convBtn.addEventListener("click", e => {
     convert();
 })
 document.addEventListener("keypress", e => {
+    console.log(e.key);
     if (e.key === "Enter") {
         const file = path.parse(image.src);
             const output = {
@@ -141,5 +143,8 @@ document.addEventListener("keypress", e => {
                 }
             )
             nextDrawImage();
+    }
+    if (e.key === "r") {
+        ax = pax, ay = pay, bx = pbx, by = pby;
     }
 })
