@@ -13,9 +13,11 @@
     "jimp": "^0.5.6"
   },
   "devDependencies": {
-    "electron": "^3.0.8"
+    "electron": "^3.0.8",
+    "electron-builder": "^20.33.2"
   },
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "rd /s/q dist & electron-builder"
   }
 }
