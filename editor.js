@@ -101,12 +101,14 @@ const update = mouseEvent => {
     }
 }
 const convert = async () => {
+    label.innerText = "Converting...";
     for(let f of dirList){
         const r = converter.read(path.parse(f).name);
         console.log(r);
         await converter.conv2(r)
         console.log(1);
     }
+    label.innerText = "OK";
 }
 
 setup();

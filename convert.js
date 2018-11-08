@@ -116,7 +116,7 @@ module.exports = {
                     // トリミング
                     .crop(0, 0, paper.bitmap.width, trimh)
                     // 書き出し
-                    .write(`${dir}output/${data.name}_${data.ext}`);
+                    .write(`${dir}convert/${data.name}_${data.ext}`);
                 // console.log(trimh);
 
                 // console.log('中点:', cent);
